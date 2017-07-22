@@ -1,6 +1,6 @@
 {
 	"name": "fswin-aio",
-	"version": "2.17.603",
+	"version": "2.17.604",
 	"description": "fswin all in one",
 	"main": "index.js",
 	"engines": {

@@ -377,8 +377,8 @@ private:
 						} else if (pInfo->Action == FILE_ACTION_RENAMED_NEW_NAME) {
 							if (self->oldName) {
 								RETURNTYPE<Object> arg = Object::New(ISOLATE);
-								arg->Set(NEWSTRING(SYB_EVT_REN_OLDNAME), filename);
-								arg->Set(NEWSTRING(SYB_EVT_REN_NEWNAME), NEWSTRING_TWOBYTES(self->oldName));
+								arg->Set(NEWSTRING(SYB_EVT_REN_NEWNAME), filename);
+								arg->Set(NEWSTRING(SYB_EVT_REN_OLDNAME), NEWSTRING_TWOBYTES(self->oldName));
 								delete self->oldName;
 								self->oldName = NULL;
 								callJs(self, SYB_EVT_REN, arg);
