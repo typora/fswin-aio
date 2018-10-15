@@ -78,43 +78,43 @@ public:
 		RETURNTYPE<String> tmp;
 		attrVal *a = new attrVal;
 		tmp = NEWSTRING(SYB_FILEATTR_ISARCHIVED);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->archive = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->archive = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISHIDDEN);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->hidden = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->hidden = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISNOTCONTENTINDEXED);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->notContentIndexed = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->notContentIndexed = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISOFFLINE);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->offline = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->offline = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISREADONLY);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->readonly = (attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1);
 		} else {
 			a->readonly = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISSYSTEM);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->system = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->system = 0;
 		}
 		tmp = NEWSTRING(SYB_FILEATTR_ISTEMPORARY);
-		if (attr->HasOwnProperty(tmp)) {
+		if (Nan::HasOwnProperty(attr, tmp).FromMaybe(false)) {
 			a->temporary = attr->Get(tmp)->ToBoolean()->IsTrue() ? 1 : -1;
 		} else {
 			a->temporary = 0;

@@ -3,6 +3,8 @@
 #include <node.h>
 #include <node_object_wrap.h>
 #include <uv.h>
+
+#include <nan.h>
 //#include <iostream>
 
 //#pragma comment(lib, "iojs.lib")
@@ -48,10 +50,11 @@ using namespace node;
 #	define RETURNTYPE Local
 #	define RETURN(v) args.GetReturnValue().Set((v))
 #	define RETURN_SCOPE(v) return scope.Escape((v))
-#	define NEWSTRING(v) String::NewFromOneByte(isolate, (uint8_t*)(v))
+// #	define NEWSTRING(v) String::NewFromOneByte(isolate, (uint8_t*)(v), v8::NewStringType::kNormal, str.size(), strlen(v))
+#	define NEWSTRING(v)  (Nan::New<v8::String>((char*)(v))).ToLocalChecked()
 #	define NEWSTRING_TWOBYTES(v) String::NewFromTwoByte(isolate, (uint16_t*)(v))
 #	define NEWSTRING_TWOBYTES_LEN(v, l) String::NewFromTwoByte(isolate, (uint16_t*)(v), String::kNormalString, (l))
-#	define THROWEXCEPTION(v) isolate->ThrowException(Exception::Error(String::NewFromOneByte(isolate, (uint8_t*)(v))))
+#	define THROWEXCEPTION(v) isolate->ThrowException(Exception::Error(NEWSTRING((uint8_t*)(v))))
 #	define JSFUNC(name) void (name)(const FunctionCallbackInfo<Value>& args)
 #	define PERSISTENT_NEW(name, v, t) (name).Reset(isolate, (v))
 #	define PERSISTENT_CONV(v, t) Local<t>::New(isolate, (v))
@@ -60,7 +63,7 @@ using namespace node;
 #	define SCOPE_ESCAPABLE EscapableHandleScope scope(isolate)
 #	define OBJ_HANDLE persistent()
 #	define THEASYNCOVERLAP u.io.overlapped
-#	define SETWITHATTR(obj, key, value, attr) (obj)->ForceSet((key), (value), (attr))
+#	define SETWITHATTR(obj, key, value, attr) Nan::DefineOwnProperty((obj), (key), (value), (attr))
 #	define NEWFUNCTION(call) Function::New(isolate, (call))
 #endif
 

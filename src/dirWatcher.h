@@ -173,15 +173,15 @@ private:
 				if (args.Length() > 2 && args[2]->IsObject()) {
 					RETURNTYPE<Object> iopt = Handle<Object>::Cast(args[2]);
 					RETURNTYPE<String> tmp = NEWSTRING(SYB_OPT_SUBDIRS);
-					if (iopt->HasOwnProperty(tmp) && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
+					if (Nan::HasOwnProperty(iopt, tmp).FromMaybe(false)  && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
 						subDirs = false;
 					}
 					tmp = NEWSTRING(SYB_OPT_FILESIZE);
-					if (iopt->HasOwnProperty(tmp) && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
+					if (Nan::HasOwnProperty(iopt, tmp).FromMaybe(false) && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
 						options ^= FILE_NOTIFY_CHANGE_SIZE;
 					}
 					tmp = NEWSTRING(SYB_OPT_LASTWRITE);
-					if (iopt->HasOwnProperty(tmp) && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
+					if (Nan::HasOwnProperty(iopt, tmp).FromMaybe(false) && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
 						options ^= FILE_NOTIFY_CHANGE_LAST_WRITE;
 					}
 					if (iopt->Get(NEWSTRING(SYB_OPT_LASTACCESS))->ToBoolean()->IsTrue()) {
@@ -200,14 +200,6 @@ private:
 				String::Value s(args[0]);
 				new dirWatcher(args.This(), (wchar_t*)*s, RETURNTYPE<Function>::Cast(args[1]), subDirs, options);
 				r = args.This();
-			} else {
-				if (args.Length() > 2) {
-					RETURNTYPE<Value> v[3] = {args[0], args[1], args[2]};
-					r = args.Callee()->CallAsConstructor(3, v);
-				} else {
-					RETURNTYPE<Value> v[2] = {args[0], args[1]};
-					r = args.Callee()->CallAsConstructor(2, v);
-				}
 			}
 		} else {
 			r = THROWEXCEPTION(SYB_ERR_WRONG_ARGUMENTS);
