@@ -42,8 +42,8 @@ public:
 	typedef bool(*findResultCall)(const WIN32_FIND_DATAW *info, void *data);
 private:
 	const struct jsCallbackData {
-		Handle<Object> self;
-		Handle<Function> func;
+		Local<Object> self;
+		Local<Function> func;
 	};
 	const struct workdata {
 		uv_work_t req;
@@ -111,7 +111,7 @@ public:
 		}
 		return result;
 	}
-	static Handle<Object> fileInfoToJs(const WIN32_FIND_DATAW *info) {//this function does not check whether info is NULL, make sure it is not before calling
+	static Local<Object> fileInfoToJs(const WIN32_FIND_DATAW *info) {//this function does not check whether info is NULL, make sure it is not before calling
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;
@@ -170,7 +170,7 @@ public:
 		o->Set(NEWSTRING(SYB_FILEATTR_ISNOSCRUBDATA), info->dwFileAttributes&FILE_ATTRIBUTE_NO_SCRUB_DATA ? True(ISOLATE) : False(ISOLATE));
 		RETURN_SCOPE(o);
 	}
-	static Handle<Array> basicToJs(resultData *data) {
+	static Local<Array> basicToJs(resultData *data) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<Array> a = Array::New(ISOLATE);
@@ -182,7 +182,7 @@ public:
 		}
 		RETURN_SCOPE(a);
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;
@@ -270,7 +270,7 @@ private:
 			if (args.Length() > 0 && (args[0]->IsString() || args[0]->IsStringObject())) {
 				String::Value spath(args[0]);
 				if (args.Length() > 1 && args[1]->IsFunction()) {
-					jsCallbackData callbackdata = {args.This(), Handle<Function>::Cast(args[1])};
+					jsCallbackData callbackdata = {args.This(), Local<Function>::Cast(args[1])};
 					result = Integer::New(ISOLATE_C basicWithCallback((wchar_t*)*spath, jsSyncCallback, &callbackdata));
 				} else {
 					result = basicToJs(basic((wchar_t*)*spath));

@@ -10,7 +10,7 @@
 #include "setShortName.h"
 #include "splitPath.h"
 
-static void moduleRegister(Handle<Object> target) {
+static void moduleRegister(Local<Object> target) {
 	ISOLATE_NEW;
 	SCOPE;
 	SETWITHATTR(target, NEWSTRING("version"), NEWSTRING(FSWIN_VERSION), SYB_ATTR_CONST);

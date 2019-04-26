@@ -27,7 +27,7 @@ public:
 		}
 		return result;
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;

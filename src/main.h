@@ -24,14 +24,14 @@ using namespace node;
 #	define ISOLATE_C
 #	define ISOLATE_NEW
 #	define ISOLATE_NEW_ARGS
-#	define RETURNTYPE Handle
+#	define RETURNTYPE Local
 #	define RETURN(v) return scope.Close(v)
 #	define RETURN_SCOPE(v) RETURN(v)
 #	define NEWSTRING(v) String::New((v))
 #	define NEWSTRING_TWOBYTES(v) String::New((uint16_t*)(v))
 #	define NEWSTRING_TWOBYTES_LEN(v, l) String::New((uint16_t*)(v), (l))
 #	define THROWEXCEPTION(v) ThrowException(Exception::Error(String::New((v))))
-#	define JSFUNC(name) Handle<Value> (name)(const Arguments& args)
+#	define JSFUNC(name) Local<Value> (name)(const Arguments& args)
 #	define PERSISTENT_NEW(name, v, t) (name) = Persistent<t>::New((v))
 #	define PERSISTENT_CONV(v, t) (v)
 #	define PERSISTENT_RELEASE(name) (name).Dispose();(name).Clear()

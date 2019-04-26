@@ -30,7 +30,7 @@ public:
 		}
 		return result;
 	}
-	static Handle<Object> spacesToJs(const spaces *spc) {//this function will delete the param if it is not NULL
+	static Local<Object> spacesToJs(const spaces *spc) {//this function will delete the param if it is not NULL
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<Object> result;
@@ -42,7 +42,7 @@ public:
 		}
 		RETURN_SCOPE(result);
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;

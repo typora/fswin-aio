@@ -45,7 +45,7 @@ private:
 	void *pathbuffer;
 	BYTE parentbuffer[SYB_BUFFERSIZE];
 public:
-	dirWatcher(Handle<Object> handle, wchar_t *spath, Handle<Function> cb, bool watchSubDirs, DWORD opts):ObjectWrap() {
+	dirWatcher(Local<Object> handle, wchar_t *spath, Local<Function> cb, bool watchSubDirs, DWORD opts):ObjectWrap() {
 		ISOLATE_NEW;
 		SCOPE;
 		Wrap(handle);
@@ -99,7 +99,7 @@ public:
 		PERSISTENT_RELEASE(callback);
 		Unref();
 	}
-	static Handle<Function> functionRegister() {
+	static Local<Function> functionRegister() {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;
@@ -171,7 +171,7 @@ private:
 				DWORD options = FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE;
 				bool subDirs = true;
 				if (args.Length() > 2 && args[2]->IsObject()) {
-					RETURNTYPE<Object> iopt = Handle<Object>::Cast(args[2]);
+					RETURNTYPE<Object> iopt = Local<Object>::Cast(args[2]);
 					RETURNTYPE<String> tmp = NEWSTRING(SYB_OPT_SUBDIRS);
 					if (Nan::HasOwnProperty(iopt, tmp).FromMaybe(false)  && iopt->Get(tmp)->ToBoolean()->IsFalse()) {
 						subDirs = false;
@@ -436,7 +436,7 @@ private:
 			callJs(self, SYB_EVT_END, Undefined(ISOLATE));
 		}
 	}
-	static void callJs(dirWatcher *self, char *evt_type, Handle<Value> src) {
+	static void callJs(dirWatcher *self, char *evt_type, Local<Value> src) {
 		ISOLATE_NEW;
 		SCOPE;
 		RETURNTYPE<Value> arg[2] = {NEWSTRING(evt_type), src};

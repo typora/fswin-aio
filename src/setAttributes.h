@@ -72,7 +72,7 @@ public:
 		}
 		return result;
 	}
-	static attrVal *jsToAttrval(Handle<Object> attr) {//delete the result if it is not NULL
+	static attrVal *jsToAttrval(Local<Object> attr) {//delete the result if it is not NULL
 		ISOLATE_NEW;
 		SCOPE;
 		RETURNTYPE<String> tmp;
@@ -121,7 +121,7 @@ public:
 		}
 		return a;
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;

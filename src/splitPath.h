@@ -55,7 +55,7 @@ public:
 	}
 	//this function returns an Object with two properties: PARENT and NAME
 	//the parent property could be empty if path is a rootdir
-	static Handle<Object> js(Handle<String> path) {
+	static Local<Object> js(Local<String> path) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		String::Value p1(path);
@@ -66,7 +66,7 @@ public:
 		delete s;
 		RETURN_SCOPE(r);
 	}
-	static Handle<Function> functionRegister() {
+	static Local<Function> functionRegister() {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;

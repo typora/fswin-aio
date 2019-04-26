@@ -22,7 +22,7 @@ public:
 		}
 		return tpath;
 	}
-	static Handle<String> js(Handle<String> path, bool islong) {
+	static Local<String> js(Local<String> path, bool islong) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> r;
@@ -36,7 +36,7 @@ public:
 		}
 		RETURN_SCOPE(r);
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<Function> t = NEWFUNCTION(isAsyncVersion ? jsAsync : jsSync);

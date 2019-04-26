@@ -13,7 +13,7 @@ private:
 		WIN32_FILE_ATTRIBUTE_DATA *attr;
 	};
 public:
-	static Handle<Object> attrDataToJs(WIN32_FILE_ATTRIBUTE_DATA *data) {
+	static Local<Object> attrDataToJs(WIN32_FILE_ATTRIBUTE_DATA *data) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 
@@ -41,7 +41,7 @@ public:
 
 		RETURN_SCOPE(o);
 	}
-	static Handle<Function> functionRegister(bool isAsyncVersion) {
+	static Local<Function> functionRegister(bool isAsyncVersion) {
 		ISOLATE_NEW;
 		SCOPE_ESCAPABLE;
 		RETURNTYPE<String> tmp;
